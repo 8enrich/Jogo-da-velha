@@ -1,0 +1,503 @@
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+<Screens>:
+	transition: NoTransition()
+	Menu:
+		name: 'menu'
+	Names:
+		name: 'names'
+	Choose:
+		name: 'choose'
+	Game:
+		name: 'game'
+
+<Menu>:
+	menu_screen: menu_screen
+	text1: text1
+	text2: text2
+	play_button: play_button
+	
+	BoxLayout:
+		id: menu_screen
+		orientation: 'vertical'
+		canvas.before:
+			Color:
+				rgba: 1, 1, 1, 1
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		BoxLayout:
+			padding: self.width*.1, self.height*.1
+			spacing: '40dp'
+			size_hint_y: 1/2
+			Image:
+				source: 'title.png'
+				allow_stretch: True
+		BoxLayout:
+			orientation: 'vertical'
+			padding: self.width*.35, self.height*.23
+			spacing: '33dp'
+			Btn:
+				id: play_button
+				text: 'Jogar'
+				font_size: '25dp'
+				on_release: app.root.current = 'names'
+			Btn:
+				text: 'Opções'
+				font_size: '25dp'
+				on_release: root.mode()
+			Btn:
+				text: 'Sair'
+				font_size: '25dp'
+				on_release: root.accept()
+		BoxLayout:
+			size_hint_y: 1/10
+			spacing: '250dp'
+			Label:
+				id: text1
+				text: 'by 8enrich'
+				color: 0, 0, 0, 1
+			Label:
+				id: text2
+				text: 'v 0.1.0'
+				color: 0, 0, 0, 1
+<MyPopup>:
+	id: pop
+	size_hint: app.root.get_screen('menu').width*.0008, app.root.get_screen('menu').height*.00015
+	title: 'Confirmação'
+	background_color: 74/255, 158/255, 237/255, 1
+	separator_color: 1,1,1,1
+	BoxLayout:
+		orientation: 'vertical'
+		Label:
+			text: 'Deseja realmente sair?'
+			font_size: '20dp'
+		BoxLayout:
+			padding: self.width*.2,self.height*.2
+			spacing: '60dp'
+			Btn2:
+				text: 'Sim'
+				font_size: '16dp'
+				on_release: app.stop()
+			Btn2:
+				text: 'Não'
+				font_size: '16dp'
+				on_release: pop.dismiss()
+<My2Popup>:
+	id: pop2
+	size_hint: app.root.get_screen('menu').width*.0008, app.root.get_screen('menu').height*.00017
+	title: 'Modo'
+	background_color: 74/255, 158/255, 237/255, 1
+	separator_color: 1,1,1,1
+	BoxLayout:
+		orientation: 'vertical'
+		padding: self.width*.1, self.height*.1
+		spacing: '33dp'
+		Btn2:
+			text: 'Modo Claro'
+			font_size: '25dp'
+			on_press: 
+				app.root.get_screen('menu').white_mode()
+				pop2.dismiss()
+		Btn2:
+			text: 'Modo Escuro'
+			font_size: '25dp'
+			on_press: 
+				app.root.get_screen('menu').black_mode()
+				pop2.dismiss()
+<Names>:
+	name_screen: name_screen
+	name_1: name_1
+	name_2: name_2
+	message: message
+	text1: text1
+	text2: text2
+	
+	BoxLayout:
+		id: name_screen
+		canvas.before:
+			Color:
+				rgba: 1,1,1,1
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		orientation: 'vertical'
+		BoxLayout:
+			padding: self.width*.1, self.height*.1
+			spacing: '40dp'
+			size_hint_y: 1/2
+			Image:
+				source: 'title.png'
+				allow_stretch: True
+		BoxLayout:
+			orientation: 'vertical'
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint_y: 1/4
+				BoxLayout:
+					padding: self.width*.02, self.height*.0001
+					spacing: '10dp'
+					Label:
+						text: 'Digite seu nome:'
+						color: 74/255, 158/255, 237/255, 1
+						font_size: '20dp'
+					Label:
+						text: 'Digite seu nome:'
+						color: 232/255, 53/255, 65/255, 1
+						font_size: '20dp'
+				BoxLayout:
+					padding: self.width*.02, self.height*.0001
+					spacing: '10dp'
+					TextInput:
+						id: name_1
+						font_size: '25dp'
+					TextInput:
+						id: name_2
+						font_size: '25dp'
+			BoxLayout:
+				padding: root.width*.35, root.height*.13
+				Btn:
+					text: 'Sortear'
+					font_size: '25dp'
+					on_release: root.players()
+			BoxLayout:
+				size_hint_y: 0.55
+				Label:
+					id: message
+					text: ''
+					font_size: '20dp'
+					color: 0,0,0,1
+		BoxLayout:
+			size_hint_y: 1/10
+			spacing: '250dp'
+			Label:
+				id: text1
+				text: 'by 8enrich'
+				color: 0,0,0,1
+			Label:
+				id: text2
+				text: 'v 0.1.0'
+				color: 0,0,0,1
+<Choose>:
+	name_1: name_1
+	name_2: name_2
+	message: message
+	image_X: image_X
+	image_O: image_O
+	button_O: button_O
+	button_X: button_X
+	start_button: start_button
+	choose_screen: choose_screen
+	text1: text1
+	text2: text2
+
+	BoxLayout:
+		id: choose_screen
+		canvas.before:
+			Color:
+				rgba: 1,1,1,1
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		orientation: 'vertical'
+		BoxLayout:
+			padding: self.width*.1, self.height*.1
+			spacing: '40dp'
+			size_hint_y: 1/2
+			Image:
+				source: 'title.png'
+				allow_stretch: True
+		BoxLayout:
+			orientation: 'vertical'
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint_y: 0.3
+				BoxLayout:
+					padding: self.width*.02, self.height*.0001
+					spacing: '10dp'
+					Label:
+						text: 'Digite seu nome:'
+						color: 74/255, 158/255, 237/255, 1
+						font_size: '20dp'
+					Label:
+						text: 'Digite seu nome:'
+						color: 232/255, 53/255, 65/255, 1
+						font_size: '20dp'
+				BoxLayout:
+					padding: self.width*.01, self.height*.0001
+					spacing: '10dp'
+					TextInput:
+						id: name_1
+						font_size: '25dp'
+						disabled: True
+					TextInput:
+						id: name_2
+						font_size: '25dp'
+						disabled: True
+			BoxLayout:
+				padding: root.width*.06, root.height*.043
+				spacing: '25dp'
+				Button:
+					id: button_X
+					text: 'X'
+					font_size: '25dp'
+					on_press: root.choose_x()
+					Images:
+						id: image_X
+						source: 'greyX.png'
+						allow_stretch: True
+						size: button_X.size
+						pos: button_X.pos
+				Button:
+					id: button_O
+					text: 'O'
+					font_size: '25dp'
+					on_press: root.choose_o()
+					Images:
+						id: image_O
+						source: 'greyO.png'
+						allow_stretch: True
+						size: button_O.size
+						pos: button_O.pos
+			BoxLayout:
+				size_hint_y: .33
+				padding: root.width*.35, root.height*.01
+				Btn:
+					id: start_button
+					text: 'Começar'
+					opacity: 0
+					font_size: '25dp'
+					disabled: True
+					on_release: root.start_game()
+			BoxLayout:
+				size_hint_y: 0.55
+				Label:
+					id: message
+					text: ''
+					font_size: '20dp'
+					color: 0,0,0,1
+		BoxLayout:
+			size_hint_y: 1/10
+			spacing: '250dp'
+			Label:
+				id: text1
+				text: 'by 8enrich'
+				color: 0,0,0,1
+			Label:
+				id: text2
+				text: 'v 0.1.0'
+				color: 0,0,0,1
+				
+<Game>:
+	button1: button1
+	button1_image: button1_image
+	button2: button2
+	button2_image: button2_image
+	button3: button3
+	button3_image: button3_image
+	button4: button4
+	button4_image: button4_image
+	button5: button5
+	button5_image: button5_image
+	button6: button6
+	button6_image: button6_image
+	button7: button7
+	button7_image: button7_image
+	button8: button8
+	button8_image: button8_image
+	button9: button9
+	button9_image: button9_image
+	result_text: result_text
+	line: line
+	restart_button: restart_button
+	game_screen: game_screen
+	home_button: home_button
+	game_board: game_board
+	home_image: home_image
+	restart_image: restart_image
+	name_1: name_1
+	name_2: name_2
+	score_1: score_1
+	score_2: score_2
+	
+	BoxLayout:
+		id: game_screen
+		canvas.before:
+			Color:
+				rgba: 1,1,1,1
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		orientation: 'vertical'
+		BoxLayout:
+			size_hint_y: 1/4
+			size_hint_x: 1/4
+			BoxLayout:
+				padding: '5dp'
+				spacing: '20dp'
+				Button:
+					id: home_button
+					on_release: root.home()
+					Images:
+						id: home_image
+						source: 'home.jpg'
+						allow_stretch: True
+						size: home_button.size
+						pos: home_button.pos
+				Button:
+					id: restart_button
+					on_release: root.restart_game()
+					Images:
+						id: restart_image
+						source: 'reload.jpg'
+						allow_stretch: True
+						size: restart_button.size
+						pos: restart_button.pos
+		Boxlayout:
+			id: game_board
+			canvas.before:
+				Color:
+					rgba: 0,0,0,1
+				Rectangle:
+					size: self.width*.89, self.height*.76
+					pos: self.width*.052, self.height*.62
+			size_hint_y: 2
+			padding: root.width*.03, root.height*.03
+			spacing: '10dp'
+			orientation: 'vertical'
+			BoxLayout:
+				spacing: '10dp'
+				Button:
+					id: button1 
+					on_press: root.button_1()
+					Images:
+						id: button1_image
+						color: 0,0,0,1
+						allow_stretch: True
+						size: button1.size
+						pos: button1.pos
+				Button:
+					id: button2
+					on_press: root.button_2()
+					Images:
+						id: button2_image
+						color: 0,0,0,1
+						allow_stretch: True
+						size: button2.size
+						pos: button2.pos
+				Button:
+					id: button3
+					on_press: root.button_3()
+					Images:
+						id: button3_image
+						allow_stretch: True
+						size: button3.size
+						pos: button3.pos
+			BoxLayout:
+				spacing: '10dp'
+				Button:
+					id: button4
+					on_press: root.button_4()
+					Images:
+						id: button4_image
+						allow_stretch: True
+						size: button4.size
+						pos: button4.pos
+				Button:
+					id: button5
+					on_press: root.button_5()
+					Images:
+						id: button5_image
+						allow_stretch: True
+						size: button5.size
+						pos: button5.pos
+				Button:
+					id: button6
+					on_press: root.button_6()
+					Images:
+						id: button6_image
+						allow_stretch: True
+						size: button6.size
+						pos: button6.pos
+			BoxLayout:
+				spacing: '10dp'
+				Button:
+					id: button7
+					on_press: root.button_7()
+					Images:
+						id: button7_image
+						allow_stretch: True
+						size: button7.size
+						pos: button7.pos
+				Button:
+					id: button8
+					on_press: root.button_8()
+					Images:
+						id: button8_image
+						allow_stretch: True
+						size: button8.size
+						pos: button8.pos
+				Button:
+					id: button9
+					on_press: root.button_9()
+					Images:
+						id: button9_image
+						allow_stretch: True
+						size: button9.size
+						pos: button9.pos
+						Image:
+							id: line
+							opacity: 0
+							canvas:
+								Color:
+									rgba: 0,0,0,1
+								Line:
+									points: 0,0,0,0
+									width: 10
+		BoxLayout:
+			orientation: 'vertical'
+			BoxLayout:
+				size_hint_y: 1/20
+				Label:
+					id: result_text
+					font_size: '35dp'
+					color: 0,0,0,1
+			BoxLayout:
+				orientation: 'vertical'
+				padding: 0,self.height*.2
+				BoxLayout:
+					size_hint_y: 1/15
+					Label:
+						id: name_1
+						text: 'Name1'
+						font_size: '25dp'
+						color: 74/255, 158/255, 237/255, 1
+					Label:
+						id: name_2
+						text: 'Name2'
+						font_size: '25dp'
+						color: 232/255, 53/255, 65/255, 1
+				BoxLayout:
+					size_hint_y: 1/10
+					orientation: 'vertical'
+					BoxLayout:
+						Label:
+							text: 'V  D  E'
+							font_size: '25dp'
+							color: 74/255, 158/255, 237/255, 1
+
+						Label:
+							text: 'V  D  E'
+							font_size: '25dp'
+							color: 232/255, 53/255, 65/255, 1
+					BoxLayout:
+						Label:
+							id: score_1
+							text: '0  0  0'
+							font_size: '25dp'
+							color: 74/255, 158/255, 237/255, 1
+						Label:
+							id: score_2
+							text: '0  0  0'
+							font_size: '25dp'
+							color: 232/255, 53/255, 65/255, 1
